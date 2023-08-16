@@ -14,6 +14,6 @@ public class Principal {
         pizza1 = new Pizza();
         
         Pizza pizza2 = new Pizza("Española", "Mediana", "delgada", 8000);
-        pizza1.
+        
     }
 }
