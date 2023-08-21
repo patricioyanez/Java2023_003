@@ -62,4 +62,11 @@ public class Pizza {
         // sout + tab
         System.out.println("La pizza se está preparando...");
     }
+    
+    public void calentar()
+    {
+        System.out.println("La pizza se está calentando...");
+    }
+    
+    
 }
