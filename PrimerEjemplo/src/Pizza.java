@@ -68,5 +68,12 @@ public class Pizza {
         System.out.println("La pizza se está calentando...");
     }
     
+    public String datos()
+    {
+        return "Nombre      : " + this.nombre +
+               "\nTamaño      : " + this.tamano +
+               "\nMasa        : " + this.masa +
+               "\nPrecio      : " + this.precio;
+    }
     
 }
