@@ -34,7 +34,14 @@ public class PrincipalString {
         System.out.println("Substring: " + "MARCELA".substring(0,3));
         System.out.println("Substring: " + "MARCELA".substring(3));
         
-        // TAREA: mostrar el primer nombre de: Juan Carlos
+        System.out.println("indexOf: " + "abcd efg".indexOf("cd") );
+        
+        // TAREA: mostrar el primer nombre de: 
+        // Juan Carlos
+        // Ana Maria
+        // Patricio Fernando
+        String nombre = "Patricio Fernando";
+        System.out.println(nombre.substring(0, nombre.indexOf(" ")));
         
     }
 }
