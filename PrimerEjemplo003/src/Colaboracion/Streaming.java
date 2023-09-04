@@ -38,4 +38,8 @@ public class Streaming {
     }
     // https://www.youtube.com/watch?v=0zWsbZ8aqhw&list=PLk2rufbc0DMq2lsPolk3ZmFSSvmGkUw19
     
+    public int segundosRestantes()
+    {
+        return this.cancion.getDuracion() - this.segundosReproduccion;
+    }
 }
