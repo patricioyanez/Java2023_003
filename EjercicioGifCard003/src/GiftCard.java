@@ -71,5 +71,24 @@ public class GiftCard {
                 "\nDatos Trabajador =\n" + trabajador.imprimir();
     }
     
-    
+    public boolean validarClave()
+    {
+        String auxRut = this.trabajador.getRut().
+                                    replace(".","").
+                                    substring(0, 4);
+        int claveRut = Integer.parseInt(auxRut);
+        if(claveRut == clave)
+            return true;
+        else
+            return false;
+        
+//        return claveRut == clave;
+    }
+    public boolean validarSaldoCompra(int montoCompra)
+    {
+        if(montoCompra <= monto)
+            return true;
+        else
+            return false;
+    }
 }
