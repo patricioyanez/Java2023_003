@@ -39,4 +39,15 @@ public class Empresa {
         }
         return false;
     }
+    
+    // listar los empleados filtrando por puesto
+    
+    public void filtarEmpleadosPorPuesto(int codigoPuesto)
+    {
+        for(Empleado empleado: empleados)
+        {
+            if(empleado.getPuesto().getCodigo()== codigoPuesto)
+                System.out.println(empleado.imprimir());
+        }
+    }
 }

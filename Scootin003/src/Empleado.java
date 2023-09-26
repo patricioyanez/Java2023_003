@@ -78,7 +78,7 @@ public class Empleado {
                 "\nNombre           : " + nombre + 
                 "\nGenero           : " + genero + 
                 "\nAño de Servicio  : " + anioServicio + 
-                "\nEdad             : " + edad + 
+                "\nEdad             : " + edad + "\n" +
                 puesto.imprimir();
     }
     
