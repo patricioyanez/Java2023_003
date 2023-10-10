@@ -27,7 +27,7 @@ public class Principal {
         comoCocinar2 = manzana.cocinar(21);
         comoCocinar3 = manzana.cocinar(53, "Fuego lento");
         
-        System.out.println("\n=== sobre carga ===");
+        System.out.println("\n=== Sobre Carga ===");
         System.out.println(comoCocinar1);
         System.out.println(comoCocinar2);
         System.out.println(comoCocinar3);
