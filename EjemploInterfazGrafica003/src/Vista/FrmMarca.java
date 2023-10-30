@@ -6,6 +6,8 @@
 
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author patri
@@ -49,6 +51,11 @@ public class FrmMarca extends javax.swing.JFrame {
         chkHabilitado.setText("Habilitado");
 
         btnGrabar.setText("Grabar");
+        btnGrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrabarActionPerformed(evt);
+            }
+        });
 
         btnListar.setText("Listar");
 
@@ -152,6 +159,23 @@ public class FrmMarca extends javax.swing.JFrame {
         
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+        // TODO add your handling code here:
+        // validar
+        if(txtNombre.getText().trim().length() < 1)
+        {
+            JOptionPane.showMessageDialog(this,"Falta nombre");
+            txtNombre.requestFocus();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Datos guardados");
+        }
+        // Ejercicios:
+        // Crear Modelo y Vista para la entidad Cargo. Sus
+        // atributos son: id, nombre y habilitado
+    }//GEN-LAST:event_btnGrabarActionPerformed
 
     /**
      * @param args the command line arguments
