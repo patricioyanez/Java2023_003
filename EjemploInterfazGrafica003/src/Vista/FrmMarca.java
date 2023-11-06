@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Vista;
 
+import Modelo.Marca;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author patri
- */
 public class FrmMarca extends javax.swing.JFrame {
-
+    private Marca marca = new Marca();
     /** Creates new form FrmMarca */
     public FrmMarca() {
         initComponents();
@@ -158,6 +149,7 @@ public class FrmMarca extends javax.swing.JFrame {
         chkHabilitado.setSelected(false);
         
         txtNombre.requestFocus();
+        marca.limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
@@ -170,7 +162,10 @@ public class FrmMarca extends javax.swing.JFrame {
         }
         else
         {
+            marca.setNombre(txtNombre.getText());
+            marca.setHabilitado(chkHabilitado.isSelected());
             JOptionPane.showMessageDialog(this,"Datos guardados");
+            btnLimpiar.doClick();
         }
         // Ejercicios:
         // Crear Modelo y Vista para la entidad Cargo. Sus
