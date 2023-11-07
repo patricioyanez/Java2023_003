@@ -16,5 +16,5 @@ insert into marca values (null, 'Chevrolet', 1);
 
 
 -- Ejercicio 18/19: Crear Tabla, modelo, controlador y Formulario
- -- para la entidad Cargo (gerente, vendedor, etc)
+ -- para la entidad Cargo y comuna (gerente, vendedor, etc)
  -- los atributos son: id, nombre y habilitado.
