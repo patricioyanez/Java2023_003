@@ -2,7 +2,9 @@ package Vista;
 
 import Controlador.ControladorMarca;
 import Modelo.Marca;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class FrmMarca extends javax.swing.JFrame {
     private Marca marca = new Marca();
@@ -50,8 +52,18 @@ public class FrmMarca extends javax.swing.JFrame {
         });
 
         btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +95,11 @@ public class FrmMarca extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,10 +112,10 @@ public class FrmMarca extends javax.swing.JFrame {
                         .addGap(160, 160, 160)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(24, 24, 24)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(chkHabilitado)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +131,7 @@ public class FrmMarca extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addGap(18, 18, 18)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEliminar, btnGrabar, btnLimpiar, btnListar});
@@ -124,7 +141,7 @@ public class FrmMarca extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,9 +153,9 @@ public class FrmMarca extends javax.swing.JFrame {
                     .addComponent(btnListar)
                     .addComponent(btnEliminar)
                     .addComponent(btnLimpiar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -167,7 +184,13 @@ public class FrmMarca extends javax.swing.JFrame {
             marca.setHabilitado(chkHabilitado.isSelected());
             
             ControladorMarca cm = new ControladorMarca();
-            boolean resultado = cm.agregar(marca);
+            boolean resultado = false;
+            
+            if(marca.getId() > 0)
+                resultado = cm.actualizar(marca);
+            else
+                resultado = cm.agregar(marca);            
+            
             if(resultado)
             {
                 JOptionPane.showMessageDialog(this,"Datos guardados");
@@ -182,6 +205,56 @@ public class FrmMarca extends javax.swing.JFrame {
         // Crear Modelo y Vista para la entidad Cargo. Sus
         // atributos son: id, nombre y habilitado
     }//GEN-LAST:event_btnGrabarActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        // TODO add your handling code here:
+        
+        ControladorMarca cm = new ControladorMarca();
+        ArrayList<Marca> listado = cm.listarTodos();
+        
+        // obtener modelo de la tabla y dejarla con 0 filas
+        DefaultTableModel dtm = (DefaultTableModel)tabla.getModel();
+        dtm.setRowCount(0);
+        
+        for(Marca m: listado)
+            dtm.addRow(new Object[]{m.getId(), m.getNombre(), m.getHabilitado()});
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+        // obtener fila seleccionada
+        int fila = tabla.getSelectedRow();
+        // obtener los datos de la fila seleccionada
+        
+        int id = 0;
+        id = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
+        marca.setId(id); // id necesario para modificar o eliminar
+        
+        txtNombre.setText(tabla.getValueAt(fila, 1).toString());
+        chkHabilitado.setSelected(tabla.getValueAt(fila, 2).
+                                        toString().equals("true"));
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        if(marca.getId() < 1)
+        {
+            JOptionPane.showMessageDialog(this, "Debe Seleccionar un elemento");
+            return;
+        }
+        
+        ControladorMarca cm = new ControladorMarca();
+        boolean fueEliminado = cm.eliminar(marca.getId());
+        
+        if(fueEliminado)
+        {
+            JOptionPane.showMessageDialog(this, "La información fue eliminada");
+            btnLimpiarActionPerformed(null);
+            btnListarActionPerformed(null);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Error en la solicitud");
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
