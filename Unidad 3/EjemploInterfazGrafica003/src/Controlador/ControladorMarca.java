@@ -85,7 +85,7 @@ public class ControladorMarca {
             String sql = "SELECT ID, NOMBRE, HABILITADO FROM MARCA WHERE ID=?";
             PreparedStatement st;
             st = cx.prepareStatement(sql);   
-            st.setInt(3, id);
+            st.setInt(1, id);
             
             ResultSet rs = st.executeQuery();
             
